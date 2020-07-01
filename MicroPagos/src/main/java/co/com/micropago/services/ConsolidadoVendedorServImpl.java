@@ -14,11 +14,7 @@ public class ConsolidadoVendedorServImpl implements IConsolidadoVendedorServ{
 	@Autowired
 	private IConsolidadoVendedorRepo repository;
 	@Override
-	public ConsolidadoVendedorEntity registroConsolidado(RequestRegistroPagoDTO request) throws Exception {
-		ConsolidadoVendedorEntity entity = new ConsolidadoVendedorEntity();
-		entity.setDocVendedor(request.getConsolidadoVendedor().getDocVendedor());
-		entity.setFecha(request.getConsolidadoVendedor().getFecha());
-		entity.setValor(request.getConsolidadoVendedor().getValor());
+	public ConsolidadoVendedorEntity registroConsolidado(ConsolidadoVendedorEntity entity) throws Exception {
 		return repository.save(entity);
 	}
 

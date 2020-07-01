@@ -16,7 +16,7 @@ public class RegistroPagoCtrl {
 	@Autowired
 	private IRegistroPagoServ servicio;
 	
-	@RequestMapping("/pago")
+	@RequestMapping("/pagos")
 	public ResponseRegistroPagoDTO registrarpago(@RequestBody RequestRegistroPagoDTO request) throws Exception{
 		return servicio.registroPago(request);
 	}

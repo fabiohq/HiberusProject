@@ -1,5 +1,7 @@
 package co.com.micropago.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +15,9 @@ public class DetallePagoServImpl implements IDetallePagoServ{
 	@Autowired
 	private IDetallePagoRepo repository;
 	@Override
-	public DetallePagoEntity registroDetalle(RequestRegistroPagoDTO request) throws Exception {
-		DetallePagoEntity entity = new DetallePagoEntity();
-		entity.setDoccliente(request.getDetallePago().getDocCliente());
-		entity.setDocvendedor(request.getDetallePago().getDocVendedor());
-		entity.setFechaPago(request.getDetallePago().getFechaPago());
-		entity.setHoraVenta(request.getDetallePago().getHoraVenta());
-		entity.setIdConsolidadoVendedor(request.getDetallePago().getIdConsolidadoVendedor());
-		entity.setNombrecliente(request.getDetallePago().getNombreCliente());
-		entity.setReferencia(request.getDetallePago().getReferencia());
-		entity.setValor(request.getDetallePago().getValor());
-		return repository.save(entity);
+	public List<DetallePagoEntity> registroDetalle(List<DetallePagoEntity> listRequest) throws Exception {
+
+		return repository.saveAll(listRequest);
 	}
 
 }

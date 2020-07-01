@@ -1,11 +1,15 @@
 package co.com.micropago.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import co.com.micropago.entity.PagoPendienteEntity;
 
 public interface IPagoPendienteRepo extends JpaRepository<PagoPendienteEntity, Integer>{
 	
-	public PagoPendienteEntity findByReferencia(String referencia);
+	List<PagoPendienteEntity> findByDocumento(String documento);
+	
+	public List<PagoPendienteEntity> actualizarIdDetalle(List<PagoPendienteEntity> pagosPendientesEntity) throws Exception;
 	
 }

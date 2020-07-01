@@ -1,5 +1,7 @@
 package co.com.micropago.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,13 @@ public class PagoPendienteServImpl implements IPagoPendienteServ{
 	@Autowired
 	private IPagoPendienteRepo repository;
 	@Override
-	public PagoPendienteEntity findByReferencia(String referencia) {
-		return repository.findByReferencia(referencia);
+	public List<PagoPendienteEntity> findByDocumento(String documento) {
+		return repository.findByDocumento(documento);
 	}
 	
 	@Override
-	public PagoPendienteEntity actualizarIdDetalle(PagoPendienteEntity pagoPendiente) throws Exception {
-		return repository.save(pagoPendiente);
+	public List<PagoPendienteEntity> actualizarIdDetalle(List<PagoPendienteEntity> pagosPendientesEntity) throws Exception {
+		return repository.saveAll(pagosPendientesEntity);
 	}
 
 }

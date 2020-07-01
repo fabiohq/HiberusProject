@@ -1,6 +1,7 @@
 package co.com.micropago.DTO;
 
 import java.io.Serializable;
+import java.util.List;
 
 import co.com.micropago.vo.DetallePagoVO;
 
@@ -11,7 +12,8 @@ public class ResponseRegistroPagoDTO implements Serializable{
 	private String descripcion;
 	private String fechaPago;
 	private String horaPago;	
-	private DetallePagoVO detallePago;
+	private List<DetallePagoVO> detallePagos;
+	
 	public String getEstado() {
 		return estado;
 	}
@@ -36,12 +38,10 @@ public class ResponseRegistroPagoDTO implements Serializable{
 	public void setHoraPago(String horaPago) {
 		this.horaPago = horaPago;
 	}
-	public DetallePagoVO getDetallePago() {
-		return detallePago;
+	public List<DetallePagoVO> getDetallePagos() {
+		return detallePagos;
 	}
-	public void setDetallePago(DetallePagoVO detallePago) {
-		this.detallePago = detallePago;
+	public void setDetallePagos(List<DetallePagoVO> detallePagos) {
+		this.detallePagos = detallePagos;
 	}
-	
-	
 }

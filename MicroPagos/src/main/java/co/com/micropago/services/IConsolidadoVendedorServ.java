@@ -5,5 +5,5 @@ import co.com.micropago.entity.ConsolidadoVendedorEntity;
 
 public interface IConsolidadoVendedorServ {
 
-	public ConsolidadoVendedorEntity registroConsolidado(RequestRegistroPagoDTO request) throws Exception;
+	public ConsolidadoVendedorEntity registroConsolidado(ConsolidadoVendedorEntity entity) throws Exception;
 }
