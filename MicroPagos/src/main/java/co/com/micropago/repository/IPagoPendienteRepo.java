@@ -10,6 +10,4 @@ public interface IPagoPendienteRepo extends JpaRepository<PagoPendienteEntity, I
 	
 	List<PagoPendienteEntity> findByDocumento(String documento);
 	
-	public List<PagoPendienteEntity> actualizarIdDetalle(List<PagoPendienteEntity> pagosPendientesEntity) throws Exception;
-	
 }
