@@ -2,6 +2,7 @@ package co.com.micropago.services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import co.com.micropago.entity.ConsolidadoVendedorEntity;
 import co.com.micropago.entity.DetallePagoEntity;
 import co.com.micropago.entity.PagoPendienteEntity;
 import co.com.micropago.helpers.Util;
-import co.com.micropago.vo.ConsolidadoVendedorVO;
 import co.com.micropago.vo.DetallePagoVO;
 
 @Service
@@ -34,13 +34,15 @@ public class RegistroPagoServImpl implements IRegistroPagoServ{
 		Date fecha = new Date(fechaPago);
 		String hora = util.getHoraActual();
 		Double valor=0D;
-		String docuVendedor=null;
-		for(DetallePagoVO detalle : request.getDetallePagos()) {
-			request.getDetallePagos().get(detalle.getIdDetallePago()).setFechaPago(fecha);
-			request.getDetallePagos().get(detalle.getIdDetallePago()).setHoraVenta(hora);
+		String docCliente=null;
+		for (Iterator<DetallePagoVO> iterator = request.getDetallePagos().iterator(); iterator.hasNext();) {
+			DetallePagoVO detalle= iterator.next();
+			detalle.setFechaPago(fecha);
+			detalle.setHoraVenta(hora);
+			detalle.setDocVendedor(request.getDocVendedor());
 			valor+=detalle.getValor();
-			if(docuVendedor==null) {
-				docuVendedor=detalle.getDocVendedor();
+			if(docCliente==null) {
+				docCliente=detalle.getDocCliente();
 			}
 		}
 		ConsolidadoVendedorEntity consolidadoVendedor = new ConsolidadoVendedorEntity();
@@ -66,12 +68,15 @@ public class RegistroPagoServImpl implements IRegistroPagoServ{
 		
 		detallePagos = detallePagoService.registroDetalle(detallePagos);
 		
-		List<PagoPendienteEntity> pagosPendientes = pagoPendienteService.findByDocumento(docuVendedor);
+		List<PagoPendienteEntity> pagosPendientes = pagoPendienteService.findByDocumento(docCliente);
 		
 		for(DetallePagoEntity detallePago:detallePagos) {
-			for(PagoPendienteEntity pagoPendiente:pagosPendientes) {
+			
+			for (Iterator<PagoPendienteEntity> iterator = pagosPendientes.iterator(); iterator.hasNext();) {
+			
+				PagoPendienteEntity pagoPendiente=iterator.next();
 				if(detallePago.getReferencia().equals(pagoPendiente.getReferencia())) {
-					pagosPendientes.get(pagoPendiente.getIdPagoPendiente()).setIdDetallePago(detallePago.getIdDetallePago());
+					pagoPendiente.setIdDetallePago(detallePago.getIdDetallePago());
 					break;
 				}
 				
